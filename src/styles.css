@@ -865,6 +865,20 @@ strong {
 .magazine .hero h1 {
   font-size: clamp(55px, 5.2vw, 70px);
 }
+@media (min-width: 721px) and (max-width: 1000px) {
+  .magazine .hero {
+    display: block;
+    min-height: 0;
+  }
+  .magazine .hero h1 {
+    font-size: clamp(52px, 6vw, 62px);
+  }
+  .magazine .hero-chart {
+    max-width: 620px;
+    margin: 35px 0 0;
+    transform: none;
+  }
+}
 @media (max-width: 720px) {
   .hero h1,
   .magazine .hero h1 {
