@@ -10,7 +10,7 @@
   <meta property="og:description" content="用金融杂志的形式阅读一份有来源、有时间标记的腾讯估值分析。">
   <title>腾讯估值分析｜金融杂志</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="styles.css?v=6b08107f095f">
+  <link rel="stylesheet" href="styles.css?v=867dfcac5bf2">
 </head>
 <body class="magazine">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -47,14 +47,14 @@
       <div class="hero-figures">
         <div class="primary-figure">
           <span class="figure-label"
-            ><button type="button" class="explain" data-note="valuationRange" title="HK$470–600 是原对话根据经营现金流、净现金与投资持股推算的每股区间。它没有按后续财报重新估值，也不是实时目标价。">
+            ><button type="button" class="explain" data-note="valuationRange" title="原对话将三项人民币估值相加，以约 1.09–1.10 港元/人民币换算，再除以约 90 亿股，得到约 HK$466.3–598.9/股，展示时取整为 HK$470–600。经营业务价值本身仍依赖未完整列出的估值假设；这也不是实时目标价。">
               原分析合理价值区间
             </button></span
           ><strong>HK$470–600</strong><span class="figure-suffix">每股</span>
         </div>
         <div class="mid-figure">
           <span class="figure-label"
-            ><button type="button" class="explain" data-note="centralRange" title="HK$530–550 是原对话认为更有代表性的估值情景。它仍取决于现金流增长、资本开支和资产折价等假设。">
+            ><button type="button" class="explain" data-note="centralRange" title="HK$530–550 是原对话给出的代表性估值判断，并非上下限公式唯一推导的结果。它仍取决于现金流增长、资本开支和资产折价等假设。">
               原分析中枢
             </button></span
           ><strong>HK$530–550</strong>
@@ -64,6 +64,7 @@
         <span class="status-tag">历史分析结论</span
         ><span>原对话引用的 2026-09-30 价格：HK$431 / 股</span>
       </p>
+      <a class="calc-jump" href="#calculation-title">查看上下限计算 ↓</a>
     </div>
     <div class="hero-chart">
       <div class="chart-heading">
@@ -110,7 +111,7 @@
         <div class="bridge-name">
           <span class="bridge-index">经营</span>
           <h3>
-            <button type="button" class="explain" data-note="coreBusiness" title="原对话把正常化 Owner Earnings 约每年 2000–2200 亿元作为起点，再按未来增长和折现假设估算主营业务价值。">
+            <button type="button" class="explain" data-note="coreBusiness" title="原对话以正常化 Owner Earnings 每年约 2000–2200 亿元为起点，给出主营业务价值 3.2–4.0 万亿元。按两端对应倒推约为 16.0–18.2 倍现金流；但原文没有完整列出折现率、预测年限和终值，不能将该范围视为已独立复算。">
               核心经营业务
             </button>
           </h3>
@@ -158,6 +159,108 @@
     <div class="bridge-total">
       <span>原分析股权总价值</span><strong>RMB 3.85–4.90 万亿元</strong
       ><span class="bridge-equals">经营业务 + 净现金 + 折价后投资资产</span>
+    </div>
+    <div class="calculation" aria-labelledby="calculation-title">
+      <div class="calculation-head">
+        <span class="section-kicker">从总价值到每股价值</span>
+        <h3 id="calculation-title">上下限是怎样算出来的</h3>
+        <p>
+          先把三部分人民币价值相加，再换算港元，最后除以原对话采用的约 90 亿股。
+        </p>
+      </div>
+      <div class="calculation-grid">
+        <article class="calculation-case" data-bound="lower">
+          <div class="calculation-case-head">
+            <span>LOWER · 下限</span><strong>HK$470 <small>/ 股</small></strong>
+          </div>
+          <ol class="calculation-steps">
+            <li>
+              <span>人民币价值加总</span>
+              <p>3.20 + 0.10 + 0.55 = <strong>3.85 万亿元</strong></p>
+            </li>
+            <li>
+              <span>换算港元</span>
+              <p>
+                3.85 ×
+                <button type="button" class="explain" data-note="exchangeRate" title="原对话采用约 1 人民币 = 1.09–1.10 港元的估值换算口径。此处复算低端取 1.09、高端取 1.10；这是展示历史估值的近似参数，不是实时汇率。">
+                  1.09
+                </button>
+                = <strong>4.1965 万亿港元</strong>
+              </p>
+            </li>
+            <li>
+              <span>换算每股</span>
+              <p>
+                4.1965 万亿港元 ÷
+                <button type="button" class="explain" data-note="shareCount" title="原对话用约 90 亿股作为每股估值分母。1 万亿港元除以 90 亿股约为每股 111.1 港元。股数是近似值，变动会影响每股结果。">
+                  约 90 亿股
+                </button>
+                = <strong>HK$466.3 / 股</strong>
+              </p>
+            </li>
+          </ol>
+          <p class="calculation-rounding">
+            原分析的展示值：<button
+              type="button"
+              class="explain"
+              data-note="rounding" title="按原对话的近似输入复算，低端约 HK$466.3、上端约 HK$598.9。原分析将它们分别展示为 HK$470 和 HK$600；取整不能增加估值本身的精度。"
+            >
+              约 HK$470 / 股
+            </button>
+          </p>
+        </article>
+        <article class="calculation-case upper" data-bound="upper">
+          <div class="calculation-case-head">
+            <span>UPPER · 上限</span><strong>HK$600 <small>/ 股</small></strong>
+          </div>
+          <ol class="calculation-steps">
+            <li>
+              <span>人民币价值加总</span>
+              <p>4.00 + 0.15 + 0.75 = <strong>4.90 万亿元</strong></p>
+            </li>
+            <li>
+              <span>换算港元</span>
+              <p>
+                4.90 ×
+                <button type="button" class="explain" data-note="exchangeRate" title="原对话采用约 1 人民币 = 1.09–1.10 港元的估值换算口径。此处复算低端取 1.09、高端取 1.10；这是展示历史估值的近似参数，不是实时汇率。">
+                  1.10
+                </button>
+                = <strong>5.3900 万亿港元</strong>
+              </p>
+            </li>
+            <li>
+              <span>换算每股</span>
+              <p>
+                5.3900 万亿港元 ÷
+                <button type="button" class="explain" data-note="shareCount" title="原对话用约 90 亿股作为每股估值分母。1 万亿港元除以 90 亿股约为每股 111.1 港元。股数是近似值，变动会影响每股结果。">
+                  约 90 亿股
+                </button>
+                = <strong>HK$598.9 / 股</strong>
+              </p>
+            </li>
+          </ol>
+          <p class="calculation-rounding">
+            原分析的展示值：<button
+              type="button"
+              class="explain"
+              data-note="rounding" title="按原对话的近似输入复算，低端约 HK$466.3、上端约 HK$598.9。原分析将它们分别展示为 HK$470 和 HK$600；取整不能增加估值本身的精度。"
+            >
+              约 HK$600 / 股
+            </button>
+          </p>
+        </article>
+      </div>
+      <div class="calculation-limit">
+        <strong>经营业务这一步仍是估值判断</strong>
+        <p>
+          原对话给出每年约 2000–2200 亿元的正常化 Owner Earnings，以及 3.2–4.0
+          万亿元的经营业务价值；按两端对应倒推约为
+          <button type="button" class="explain" data-note="impliedMultiple" title="若将 3.2 万亿元与每年 2000 亿元配对，得到 16.0 倍；将 4.0 万亿元与每年 2200 亿元配对，得到约 18.2 倍。这是用估值结果倒推的等效倍数，不是原对话披露的折现参数，也不能代替完整现金流估值。">
+            16.0–18.2 倍</button
+          >。原文没有完整列出折现率、预测年限和终值，因此无法仅凭现金流起点独立推导出
+          3.2–4.0 万亿元。
+        </p>
+      </div>
     </div>
   </section>
 
@@ -342,7 +445,7 @@
 </main>
 
   <footer class="page-footer"><span>独立研究展示 · 数据与假设见原始来源</span><a href="#source-title">查看来源与版本 ↑</a></footer>
-  <script id="explain-data" type="application/json">{"valuationRange":{"title":"历史合理价值区间","body":"HK$470–600 是原对话根据经营现金流、净现金与投资持股推算的每股区间。它没有按后续财报重新估值，也不是实时目标价。"},"centralRange":{"title":"原分析中枢","body":"HK$530–550 是原对话认为更有代表性的估值情景。它仍取决于现金流增长、资本开支和资产折价等假设。"},"rangeChart":{"title":"图表读法与安全边际","body":"图表刻度为每股 380–640 港元。HK$431 是原对话引用的 2026-09-30 历史价格，不是实时行情。它与旧估值区间之间的距离只示意历史安全边际；前提是估值假设成立，不能据此作当前买卖判断。"},"bridgeBasis":{"title":"SOTP｜分部加总与取数口径","body":"原分析分别估算核心经营业务、净现金和投资资产，再加总为人民币股权价值。三部分资产余额的取数期不完全相同；旧基期数字需整体复核，不能只替换某一个分项。"},"factsBasis":{"title":"季度数据与期末余额","body":"营业收入、资本开支和自由现金流是 2026 年第二季的单季流量；净现金与投资持股是 2026-06-30 的期末存量。这些披露可以核对原分析，却不能自动替换原估值模型的全部假设。"},"ownerEarnings":{"title":"Owner Earnings｜股东可得现金","body":"估值者估计公司维持业务运转后，长期能为股东创造的现金。腾讯财报不直接披露这个数；维持性与增长性资本开支的拆分属于分析判断。"},"netCash":{"title":"净现金","body":"现金、存款等扣除有息债务后的余额。原对话引用 2025 年末约 1071 亿元，2026-06-30 公司披露约 582 亿元。它是期末存量，不能把新余额单独代入旧时点估值模型。"},"portfolio":{"title":"投资组合","body":"主营业务以外的上市和非上市公司持股。原分析对其施加 30%–45% 折价，比例属于估值判断；还应区分公允价值、账面价值与真正可变现的价值。"},"coreBusiness":{"title":"核心经营业务价值","body":"原对话把正常化 Owner Earnings 约每年 2000–2200 亿元作为起点，再按未来增长和折现假设估算主营业务价值。"},"assumption":{"title":"分析假设","body":"由估值者选择的现金流、增长率或折价等参数，不能当作腾讯披露的事实。"},"oldBase":{"title":"旧基期","body":"该估值分项引用原对话所用的 2025 年末资产数据；2026 年第二季余额已变化，需要整体重估后才能更新每股区间。"},"revenue":{"title":"营业收入","body":"公司 2026 年第二季报告的单季收入为人民币 2048 亿元，同比增长 11%。这是季度流量，不能与期末资产余额直接相加。"},"marketing":{"title":"营销服务收入","body":"主要反映腾讯广告与营销服务业务。2026 年第二季为 436 亿元，同比增长约 22%；收入增长不直接等于自由现金流增长。"},"capex":{"title":"CapEx｜资本开支","body":"用于设备、数据中心等长期资产的支出。2026 年第二季为 528 亿元，同比增长 176%。财报披露总额，但没有直接拆分其中多少是维持现有业务、多少能带来未来增长。"},"fcf":{"title":"FCF｜报告自由现金流","body":"经营活动产生的现金扣除资本开支等后的现金。腾讯 2026 年第二季报告值为 −138 亿元，受到算力采购预付款等因素影响；应与补充调整口径分开看。"},"adjustedFcf":{"title":"剔除算力预付款的补充口径","body":"公司表示若剔除算力采购预付款，当季自由现金流会是 +376 亿元。它帮助理解一次性现金时点影响，但不能覆盖 −138 亿元的报告值。"},"fairValue":{"title":"上市投资公允价值","body":"按报告日市场价格等方法衡量的上市持股价值。2025 年末为 6727 亿元，2026 年第二季末为 4872 亿元；市场价格变化会改变余额。两个时点的披露变化没有直接用于重算旧估值区间。"},"bookValue":{"title":"非上市投资账面价值","body":"非上市持股在财务报表中的账面金额。2025 年末为 3631 亿元，2026 年第二季末为 3879 亿元；不等同于可立即出售得到的现金，也不能与上市投资公允价值视作同一口径。这些变化没有直接用于重算旧估值区间。"},"normalizedGrowth":{"title":"正常化现金流增长","body":"把短期波动和特殊支出调整后，对长期可持续现金创造的估计。原分析使用约 7%–10% 增长假设，未来季度仍需验证。"},"growthCapex":{"title":"增长型与维持性资本开支","body":"维持性支出用于保持现有业务能力；增长型支出期望创造未来增量利润。财报总额不能自动拆分两者，AI 投入回报需要后续证据。"},"incrementalRoic":{"title":"增量 ROIC｜新增资本回报率","body":"观察新增利润相对新增投入资本的回报。判断 AI 投入是否有价值，需要同时看到利润增量、资本占用和持续时间，不能只看收入增长。"},"vie":{"title":"VIE｜可变利益实体","body":"部分中国互联网业务使用的协议控制结构。它可能带来法律和监管层面的不确定性，因此原分析把它纳入估值折价考虑。"},"pending":{"title":"尚待验证","body":"财报能确认当期支出和结果，但 AI 投入是否产生足够长期增量回报，还需要后续利润和资本占用数据。"},"qualitative":{"title":"定性判断","body":"对竞争优势、监管和结构性风险的分析，不是财报可以直接量化的单个数字。"}}</script>
+  <script id="explain-data" type="application/json">{"valuationRange":{"title":"历史合理价值区间","body":"原对话将三项人民币估值相加，以约 1.09–1.10 港元/人民币换算，再除以约 90 亿股，得到约 HK$466.3–598.9/股，展示时取整为 HK$470–600。经营业务价值本身仍依赖未完整列出的估值假设；这也不是实时目标价。"},"centralRange":{"title":"原分析中枢","body":"HK$530–550 是原对话给出的代表性估值判断，并非上下限公式唯一推导的结果。它仍取决于现金流增长、资本开支和资产折价等假设。"},"rangeChart":{"title":"图表读法与安全边际","body":"图表刻度为每股 380–640 港元。HK$431 是原对话引用的 2026-09-30 历史价格，不是实时行情。它与旧估值区间之间的距离只示意历史安全边际；前提是估值假设成立，不能据此作当前买卖判断。"},"bridgeBasis":{"title":"SOTP｜分部加总与取数口径","body":"原分析分别估算核心经营业务、净现金和投资资产，再加总为人民币股权价值。三部分资产余额的取数期不完全相同；旧基期数字需整体复核，不能只替换某一个分项。"},"factsBasis":{"title":"季度数据与期末余额","body":"营业收入、资本开支和自由现金流是 2026 年第二季的单季流量；净现金与投资持股是 2026-06-30 的期末存量。这些披露可以核对原分析，却不能自动替换原估值模型的全部假设。"},"ownerEarnings":{"title":"Owner Earnings｜股东可得现金","body":"估值者估计公司维持业务运转后，长期能为股东创造的现金。腾讯财报不直接披露这个数；维持性与增长性资本开支的拆分属于分析判断。"},"netCash":{"title":"净现金","body":"现金、存款等扣除有息债务后的余额。原对话引用 2025 年末约 1071 亿元，2026-06-30 公司披露约 582 亿元。它是期末存量，不能把新余额单独代入旧时点估值模型。"},"portfolio":{"title":"投资组合","body":"主营业务以外的上市和非上市公司持股。原分析对其施加 30%–45% 折价，比例属于估值判断；还应区分公允价值、账面价值与真正可变现的价值。"},"coreBusiness":{"title":"核心经营业务价值","body":"原对话以正常化 Owner Earnings 每年约 2000–2200 亿元为起点，给出主营业务价值 3.2–4.0 万亿元。按两端对应倒推约为 16.0–18.2 倍现金流；但原文没有完整列出折现率、预测年限和终值，不能将该范围视为已独立复算。"},"exchangeRate":{"title":"估值换算汇率","body":"原对话采用约 1 人民币 = 1.09–1.10 港元的估值换算口径。此处复算低端取 1.09、高端取 1.10；这是展示历史估值的近似参数，不是实时汇率。"},"shareCount":{"title":"约 90 亿股摊薄股数","body":"原对话用约 90 亿股作为每股估值分母。1 万亿港元除以 90 亿股约为每股 111.1 港元。股数是近似值，变动会影响每股结果。"},"rounding":{"title":"端点取整","body":"按原对话的近似输入复算，低端约 HK$466.3、上端约 HK$598.9。原分析将它们分别展示为 HK$470 和 HK$600；取整不能增加估值本身的精度。"},"impliedMultiple":{"title":"倒推的现金流倍数","body":"若将 3.2 万亿元与每年 2000 亿元配对，得到 16.0 倍；将 4.0 万亿元与每年 2200 亿元配对，得到约 18.2 倍。这是用估值结果倒推的等效倍数，不是原对话披露的折现参数，也不能代替完整现金流估值。"},"assumption":{"title":"分析假设","body":"由估值者选择的现金流、增长率或折价等参数，不能当作腾讯披露的事实。"},"oldBase":{"title":"旧基期","body":"该估值分项引用原对话所用的 2025 年末资产数据；2026 年第二季余额已变化，需要整体重估后才能更新每股区间。"},"revenue":{"title":"营业收入","body":"公司 2026 年第二季报告的单季收入为人民币 2048 亿元，同比增长 11%。这是季度流量，不能与期末资产余额直接相加。"},"marketing":{"title":"营销服务收入","body":"主要反映腾讯广告与营销服务业务。2026 年第二季为 436 亿元，同比增长约 22%；收入增长不直接等于自由现金流增长。"},"capex":{"title":"CapEx｜资本开支","body":"用于设备、数据中心等长期资产的支出。2026 年第二季为 528 亿元，同比增长 176%。财报披露总额，但没有直接拆分其中多少是维持现有业务、多少能带来未来增长。"},"fcf":{"title":"FCF｜报告自由现金流","body":"经营活动产生的现金扣除资本开支等后的现金。腾讯 2026 年第二季报告值为 −138 亿元，受到算力采购预付款等因素影响；应与补充调整口径分开看。"},"adjustedFcf":{"title":"剔除算力预付款的补充口径","body":"公司表示若剔除算力采购预付款，当季自由现金流会是 +376 亿元。它帮助理解一次性现金时点影响，但不能覆盖 −138 亿元的报告值。"},"fairValue":{"title":"上市投资公允价值","body":"按报告日市场价格等方法衡量的上市持股价值。2025 年末为 6727 亿元，2026 年第二季末为 4872 亿元；市场价格变化会改变余额。两个时点的披露变化没有直接用于重算旧估值区间。"},"bookValue":{"title":"非上市投资账面价值","body":"非上市持股在财务报表中的账面金额。2025 年末为 3631 亿元，2026 年第二季末为 3879 亿元；不等同于可立即出售得到的现金，也不能与上市投资公允价值视作同一口径。这些变化没有直接用于重算旧估值区间。"},"normalizedGrowth":{"title":"正常化现金流增长","body":"把短期波动和特殊支出调整后，对长期可持续现金创造的估计。原分析使用约 7%–10% 增长假设，未来季度仍需验证。"},"growthCapex":{"title":"增长型与维持性资本开支","body":"维持性支出用于保持现有业务能力；增长型支出期望创造未来增量利润。财报总额不能自动拆分两者，AI 投入回报需要后续证据。"},"incrementalRoic":{"title":"增量 ROIC｜新增资本回报率","body":"观察新增利润相对新增投入资本的回报。判断 AI 投入是否有价值，需要同时看到利润增量、资本占用和持续时间，不能只看收入增长。"},"vie":{"title":"VIE｜可变利益实体","body":"部分中国互联网业务使用的协议控制结构。它可能带来法律和监管层面的不确定性，因此原分析把它纳入估值折价考虑。"},"pending":{"title":"尚待验证","body":"财报能确认当期支出和结果，但 AI 投入是否产生足够长期增量回报，还需要后续利润和资本占用数据。"},"qualitative":{"title":"定性判断","body":"对竞争优势、监管和结构性风险的分析，不是财报可以直接量化的单个数字。"}}</script>
   <script src="explain.js?v=26cd6d347e4f" defer></script>
 </body>
 </html>

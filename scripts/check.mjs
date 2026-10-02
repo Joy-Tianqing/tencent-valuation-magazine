@@ -18,6 +18,7 @@ for (const anchor of localAnchors)
   assert(ids.includes(anchor), `Missing anchor: ${anchor}`);
 for (const heading of [
   "价值由三部分组成",
+  "上下限是怎样算出来的",
   "财报给出的核对点",
   "真正需要判断的变量",
   "来源与版本",
@@ -53,6 +54,53 @@ assert(noteKeys.length >= 20, "Key concepts should have inline explanations");
 for (const key of noteKeys) assert(notes[key], `Missing explanation: ${key}`);
 for (const key of Object.keys(notes))
   assert(noteKeys.includes(key), `Unused explanation: ${key}`);
+for (const row of [
+  {
+    bound: "lower",
+    parts: ["3.20", "0.10", "0.55"],
+    fx: "1.09",
+    total: "3.85",
+    hkd: "4.1965",
+    perShare: "466.3",
+    rounded: "470",
+  },
+  {
+    bound: "upper",
+    parts: ["4.00", "0.15", "0.75"],
+    fx: "1.10",
+    total: "4.90",
+    hkd: "5.3900",
+    perShare: "598.9",
+    rounded: "600",
+  },
+]) {
+  const scenario = html.match(
+    new RegExp(
+      `<article class="calculation-case(?: upper)?" data-bound="${row.bound}">([\\s\\S]*?)<\\/article>`,
+    ),
+  )?.[1];
+  assert(scenario, `Missing ${row.bound} calculation`);
+  const shown = scenario.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+  const total = row.parts.reduce((sum, part) => sum + Number(part), 0);
+  assert.equal(total.toFixed(2), row.total);
+  assert.equal((total * Number(row.fx)).toFixed(4), row.hkd);
+  assert.equal(
+    ((total * Number(row.fx) * 10000) / 90).toFixed(1),
+    row.perShare,
+  );
+  assert(shown.includes(`${row.parts.join(" + ")} = ${row.total} 万亿元`));
+  assert(shown.includes(`${row.total} × ${row.fx} = ${row.hkd} 万亿港元`));
+  assert(
+    shown.includes(
+      `${row.hkd} 万亿港元 ÷ 约 90 亿股 = HK$${row.perShare} / 股`,
+    ),
+  );
+  assert(shown.includes(`约 HK$${row.rounded} / 股`));
+}
+assert(
+  html.includes("原文没有完整列出折现率"),
+  "Core valuation limits must stay explicit",
+);
 assert(
   !html.includes('class="chart-note"'),
   "Chart explanation should be in hover notes",

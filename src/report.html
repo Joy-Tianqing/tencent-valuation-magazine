@@ -38,6 +38,7 @@
         <span class="status-tag">历史分析结论</span
         ><span>原对话引用的 2026-09-30 价格：HK$431 / 股</span>
       </p>
+      <a class="calc-jump" href="#calculation-title">查看上下限计算 ↓</a>
     </div>
     <div class="hero-chart">
       <div class="chart-heading">
@@ -132,6 +133,108 @@
     <div class="bridge-total">
       <span>原分析股权总价值</span><strong>RMB 3.85–4.90 万亿元</strong
       ><span class="bridge-equals">经营业务 + 净现金 + 折价后投资资产</span>
+    </div>
+    <div class="calculation" aria-labelledby="calculation-title">
+      <div class="calculation-head">
+        <span class="section-kicker">从总价值到每股价值</span>
+        <h3 id="calculation-title">上下限是怎样算出来的</h3>
+        <p>
+          先把三部分人民币价值相加，再换算港元，最后除以原对话采用的约 90 亿股。
+        </p>
+      </div>
+      <div class="calculation-grid">
+        <article class="calculation-case" data-bound="lower">
+          <div class="calculation-case-head">
+            <span>LOWER · 下限</span><strong>HK$470 <small>/ 股</small></strong>
+          </div>
+          <ol class="calculation-steps">
+            <li>
+              <span>人民币价值加总</span>
+              <p>3.20 + 0.10 + 0.55 = <strong>3.85 万亿元</strong></p>
+            </li>
+            <li>
+              <span>换算港元</span>
+              <p>
+                3.85 ×
+                <button type="button" class="explain" data-note="exchangeRate">
+                  1.09
+                </button>
+                = <strong>4.1965 万亿港元</strong>
+              </p>
+            </li>
+            <li>
+              <span>换算每股</span>
+              <p>
+                4.1965 万亿港元 ÷
+                <button type="button" class="explain" data-note="shareCount">
+                  约 90 亿股
+                </button>
+                = <strong>HK$466.3 / 股</strong>
+              </p>
+            </li>
+          </ol>
+          <p class="calculation-rounding">
+            原分析的展示值：<button
+              type="button"
+              class="explain"
+              data-note="rounding"
+            >
+              约 HK$470 / 股
+            </button>
+          </p>
+        </article>
+        <article class="calculation-case upper" data-bound="upper">
+          <div class="calculation-case-head">
+            <span>UPPER · 上限</span><strong>HK$600 <small>/ 股</small></strong>
+          </div>
+          <ol class="calculation-steps">
+            <li>
+              <span>人民币价值加总</span>
+              <p>4.00 + 0.15 + 0.75 = <strong>4.90 万亿元</strong></p>
+            </li>
+            <li>
+              <span>换算港元</span>
+              <p>
+                4.90 ×
+                <button type="button" class="explain" data-note="exchangeRate">
+                  1.10
+                </button>
+                = <strong>5.3900 万亿港元</strong>
+              </p>
+            </li>
+            <li>
+              <span>换算每股</span>
+              <p>
+                5.3900 万亿港元 ÷
+                <button type="button" class="explain" data-note="shareCount">
+                  约 90 亿股
+                </button>
+                = <strong>HK$598.9 / 股</strong>
+              </p>
+            </li>
+          </ol>
+          <p class="calculation-rounding">
+            原分析的展示值：<button
+              type="button"
+              class="explain"
+              data-note="rounding"
+            >
+              约 HK$600 / 股
+            </button>
+          </p>
+        </article>
+      </div>
+      <div class="calculation-limit">
+        <strong>经营业务这一步仍是估值判断</strong>
+        <p>
+          原对话给出每年约 2000–2200 亿元的正常化 Owner Earnings，以及 3.2–4.0
+          万亿元的经营业务价值；按两端对应倒推约为
+          <button type="button" class="explain" data-note="impliedMultiple">
+            16.0–18.2 倍</button
+          >。原文没有完整列出折现率、预测年限和终值，因此无法仅凭现金流起点独立推导出
+          3.2–4.0 万亿元。
+        </p>
+      </div>
     </div>
   </section>
 
