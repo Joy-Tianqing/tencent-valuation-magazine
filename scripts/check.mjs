@@ -41,6 +41,10 @@ for (const value of [
 assert(html.includes("历史分析快照"), "The valuation date warning is required");
 assert(html.includes("腾讯官方业绩 PDF"), "The official source must be linked");
 assert(!html.includes("{{SOURCE_"), "Source URL placeholders must be resolved");
+assert(
+  /href="styles\.css\?v=[a-f0-9]{12}"/.test(html),
+  "Stylesheet needs a versioned URL",
+);
 assert(!/theme-/.test(css), "Unused theme system should not ship");
 assert(
   !html.includes("四种样式"),

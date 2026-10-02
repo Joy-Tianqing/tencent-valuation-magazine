@@ -3,6 +3,7 @@ declare const require: any;
 declare const process: any;
 const fs = require("fs");
 const path = require("path");
+const nodeCrypto = require("crypto");
 
 const sourceChat =
   "https://chatgpt.com/share/6abf5c95-2d88-83ea-b81d-019e484110e8";
@@ -13,6 +14,12 @@ const commonMain = fs
   .readFileSync(path.resolve(process.cwd(), "src/report.html"), "utf8")
   .replace("{{SOURCE_CHAT}}", sourceChat)
   .replace("{{SOURCE_Q2}}", sourceQ2);
+const stylePath = path.resolve(process.cwd(), "src/styles.css");
+const styleHash = nodeCrypto
+  .createHash("sha256")
+  .update(fs.readFileSync(stylePath))
+  .digest("hex")
+  .slice(0, 12);
 
 const html = `<!doctype html>
 <html lang="zh-CN">
@@ -26,7 +33,7 @@ const html = `<!doctype html>
   <meta property="og:description" content="用金融杂志的形式阅读一份有来源、有时间标记的腾讯估值分析。">
   <title>腾讯估值分析｜金融杂志</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=${styleHash}">
 </head>
 <body class="magazine">
   <a class="skip-link" href="#main">跳到正文</a>
@@ -48,10 +55,7 @@ const html = `<!doctype html>
 const output = path.resolve(process.cwd(), "docs");
 fs.mkdirSync(output, { recursive: true });
 fs.writeFileSync(path.join(output, "index.html"), html);
-fs.copyFileSync(
-  path.resolve(process.cwd(), "src/styles.css"),
-  path.join(output, "styles.css"),
-);
+fs.copyFileSync(stylePath, path.join(output, "styles.css"));
 fs.copyFileSync(
   path.resolve(process.cwd(), "src/favicon.svg"),
   path.join(output, "favicon.svg"),
