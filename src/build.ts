@@ -10,16 +10,38 @@ const sourceChat =
 const sourceQ2 =
   "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf";
 
+type Explanation = { title: string; body: string };
+const notes: Record<string, Explanation> = JSON.parse(
+  fs.readFileSync(path.resolve(process.cwd(), "src/notes.json"), "utf8"),
+);
+function escapeAttribute(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 const commonMain = fs
   .readFileSync(path.resolve(process.cwd(), "src/report.html"), "utf8")
   .replace("{{SOURCE_CHAT}}", sourceChat)
-  .replace("{{SOURCE_Q2}}", sourceQ2);
+  .replace("{{SOURCE_Q2}}", sourceQ2)
+  .replace(/data-note="([^"]+)"/g, (_: string, key: string) => {
+    if (!notes[key]) throw new Error(`Missing explanation: ${key}`);
+    return `data-note="${key}" title="${escapeAttribute(notes[key].body)}"`;
+  });
 const stylePath = path.resolve(process.cwd(), "src/styles.css");
 const styleHash = nodeCrypto
   .createHash("sha256")
   .update(fs.readFileSync(stylePath))
   .digest("hex")
   .slice(0, 12);
+const scriptHash = nodeCrypto
+  .createHash("sha256")
+  .update(fs.readFileSync(path.resolve(process.cwd(), "docs/explain.js")))
+  .digest("hex")
+  .slice(0, 12);
+const notesJson = JSON.stringify(notes).replace(/</g, "\\u003c");
 
 const html = `<!doctype html>
 <html lang="zh-CN">
@@ -27,7 +49,7 @@ const html = `<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#fafaf7">
-  <meta name="description" content="腾讯控股估值分析快照：价值构成、2026 年第二季财报核对、关键假设和专业术语解释。">
+  <meta name="description" content="腾讯控股估值分析快照：价值构成、2026 年第二季财报核对、关键假设和就地悬停解释。">
   <meta property="og:type" content="article">
   <meta property="og:title" content="腾讯的合理价值，取决于现金怎样增长">
   <meta property="og:description" content="用金融杂志的形式阅读一份有来源、有时间标记的腾讯估值分析。">
@@ -43,12 +65,14 @@ const html = `<!doctype html>
       <a href="#bridge-title">估值结构</a>
       <a href="#facts-title">财报核对</a>
       <a href="#thesis-title">关键判断</a>
-      <a href="#glossary-title">术语解释</a>
+      <a href="#source-title">来源与版本</a>
     </nav>
     <span class="issue-label">2026 Q2</span>
   </header>
   ${commonMain}
   <footer class="page-footer"><span>独立研究展示 · 数据与假设见原始来源</span><a href="#source-title">查看来源与版本 ↑</a></footer>
+  <script id="explain-data" type="application/json">${notesJson}</script>
+  <script src="explain.js?v=${scriptHash}" defer></script>
 </body>
 </html>`;
 

@@ -154,6 +154,17 @@ strong {
   flex-wrap: wrap;
   margin-top: 34px;
 }
+.explain-hint {
+  margin: 13px 0 0;
+  color: var(--accent, #bd514a);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.explain-hint::before {
+  content: "ⓘ";
+  margin-right: 6px;
+}
 .figure-label {
   display: block;
   font-size: 12px;
@@ -294,12 +305,6 @@ strong {
   left: 84.6%;
   top: 119px;
 }
-.chart-note {
-  font-size: 11px;
-  line-height: 1.55;
-  color: var(--muted, #55716b);
-  margin: 4px 0 0;
-}
 .content-section {
   padding: 64px 0;
   border-top: 1px solid var(--line, #dce6e2);
@@ -324,6 +329,12 @@ strong {
 .section-head p {
   font-size: 14px;
   margin: 0;
+  color: var(--muted, #55716b);
+}
+.section-head .section-explain {
+  justify-self: start;
+  align-self: end;
+  font-size: 13px;
   color: var(--muted, #55716b);
 }
 .bridge-list {
@@ -365,12 +376,6 @@ strong {
   letter-spacing: -0.05em;
   margin: 28px 0 15px;
   color: var(--ink, #163d3a);
-}
-.bridge-item p {
-  font-size: 12px;
-  min-height: 64px;
-  color: var(--muted, #55716b);
-  margin-bottom: 14px;
 }
 .bridge-total {
   display: flex;
@@ -416,11 +421,6 @@ strong {
   color: var(--ink, #163d3a);
   margin: 12px 0;
 }
-.fact p {
-  font-size: 12px;
-  color: var(--muted, #55716b);
-  margin: 0;
-}
 .fact.caution strong {
   color: var(--warning, #a25448);
 }
@@ -452,11 +452,6 @@ strong {
 .asset-compare b {
   font-weight: 400;
   color: var(--accent, #2a8175);
-}
-.inline-note {
-  font-size: 12px;
-  color: var(--muted, #55716b);
-  margin: 15px 0 0;
 }
 .thesis-grid {
   display: grid;
@@ -509,25 +504,6 @@ strong {
   margin: 0;
   color: var(--muted, #55716b);
 }
-.glossary-list {
-  border-top: 1px solid var(--line, #dce6e2);
-}
-.glossary-list details {
-  border-bottom: 1px solid var(--line, #dce6e2);
-  padding: 18px 6px;
-}
-.glossary-list summary {
-  font-size: 15px;
-  font-weight: 720;
-  cursor: pointer;
-  color: var(--ink, #163d3a);
-}
-.glossary-list details p {
-  font-size: 13px;
-  color: var(--muted, #55716b);
-  max-width: 800px;
-  margin: 12px 0 2px;
-}
 .source-section {
   padding: 35px 30px;
   background: var(--source-bg, #dfeae4);
@@ -552,6 +528,69 @@ strong {
   gap: 20px;
   color: var(--muted, #55716b);
   font-size: 12px;
+}
+.explain {
+  appearance: none;
+  display: inline;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px dotted currentColor;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  cursor: help;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.explain:hover,
+.explain[aria-describedby] {
+  color: var(--accent, #bd514a);
+  border-bottom-style: solid;
+}
+.explain:focus-visible {
+  outline: 2px solid var(--accent, #bd514a);
+  outline-offset: 3px;
+}
+.explain-popover[hidden] {
+  display: none;
+}
+.explain-popover {
+  position: fixed;
+  z-index: 100;
+  width: 330px;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 24px);
+  overflow: hidden;
+  padding: 17px 19px 18px;
+  border-top: 3px solid #bd514a;
+  background: #1d2e42;
+  color: #f8f7f4;
+  box-shadow: 0 14px 38px rgb(21 34 48 / 24%);
+  pointer-events: none;
+}
+.explain-popover-kicker {
+  display: block;
+  margin-bottom: 7px;
+  color: #e6aaa2;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+.explain-popover-title {
+  display: block;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.35;
+}
+.explain-popover-body {
+  margin: 8px 0 0;
+  color: #d7e0e7;
+  font-size: 12px;
+  line-height: 1.65;
 }
 .magazine {
   --header: #fff;
@@ -624,7 +663,7 @@ strong {
   border: 0;
   background: #e5eef1;
   padding: 26px;
-  min-height: 250px;
+  min-height: 185px;
 }
 .magazine .bridge-item:nth-child(2) {
   background: #f4e4e1;
@@ -648,7 +687,7 @@ strong {
   grid-template-columns: repeat(2, 1fr);
 }
 .magazine .fact {
-  min-height: 170px;
+  min-height: 145px;
   background: #fff;
   border-left: 5px solid #bd514a;
   padding: 23px 28px;
@@ -777,7 +816,6 @@ strong {
   .bridge-item:last-child {
     border-bottom: 0;
   }
-  .bridge-item p,
   .thesis-item p {
     min-height: 0;
   }

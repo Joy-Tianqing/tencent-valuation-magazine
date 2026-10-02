@@ -3,8 +3,13 @@ import { readFileSync } from "node:fs";
 
 const html = readFileSync("docs/index.html", "utf8");
 const css = readFileSync("docs/styles.css", "utf8");
+const client = readFileSync("docs/explain.js", "utf8");
+const notes = JSON.parse(readFileSync("src/notes.json", "utf8"));
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
 const localAnchors = [...html.matchAll(/href="#([^"]+)"/g)].map(
+  (match) => match[1],
+);
+const noteKeys = [...html.matchAll(/data-note="([^"]+)"/g)].map(
   (match) => match[1],
 );
 
@@ -15,7 +20,6 @@ for (const heading of [
   "价值由三部分组成",
   "财报给出的核对点",
   "真正需要判断的变量",
-  "五个词，读懂这份估值",
   "来源与版本",
 ]) {
   assert(html.includes(heading), `Missing section: ${heading}`);
@@ -42,8 +46,30 @@ assert(html.includes("历史分析快照"), "The valuation date warning is requi
 assert(html.includes("腾讯官方业绩 PDF"), "The official source must be linked");
 assert(!html.includes("{{SOURCE_"), "Source URL placeholders must be resolved");
 assert(
+  !html.includes("glossary-section"),
+  "The bottom glossary must be removed",
+);
+assert(noteKeys.length >= 20, "Key concepts should have inline explanations");
+for (const key of noteKeys) assert(notes[key], `Missing explanation: ${key}`);
+for (const key of Object.keys(notes))
+  assert(noteKeys.includes(key), `Unused explanation: ${key}`);
+assert(
+  !html.includes('class="chart-note"'),
+  "Chart explanation should be in hover notes",
+);
+assert(
+  !html.includes('class="inline-note"'),
+  "Data footnotes should be in hover notes",
+);
+assert(client.includes("pointerenter"), "Hover behavior must be built");
+assert(client.includes("keydown"), "Keyboard behavior must be built");
+assert(
   /href="styles\.css\?v=[a-f0-9]{12}"/.test(html),
   "Stylesheet needs a versioned URL",
+);
+assert(
+  /src="explain\.js\?v=[a-f0-9]{12}"/.test(html),
+  "Explanation script needs a versioned URL",
 );
 assert(!/theme-/.test(css), "Unused theme system should not ship");
 assert(
@@ -51,5 +77,5 @@ assert(
   "Single-style project copy should be self-contained",
 );
 console.log(
-  "Report structure, anchors, provenance, and single-style CSS verified.",
+  "Report structure, inline explanations, anchors, provenance, and assets verified.",
 );

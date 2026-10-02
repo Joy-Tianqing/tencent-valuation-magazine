@@ -5,10 +5,10 @@
   "license": "MIT",
   "description": "An editorial, source-linked Tencent valuation snapshot",
   "scripts": {
-    "build": "tsc -p tsconfig.json && node .build/build.js",
+    "build": "tsc -p tsconfig.client.json && tsc -p tsconfig.json && node .build/build.js",
     "check": "npm run build && node scripts/check.mjs",
     "dev": "npm run build && python3 -m http.server 8767 --directory docs",
-    "format": "prettier --write src/*.ts src/*.html src/*.css scripts/*.mjs"
+    "format": "prettier --write src/*.ts src/*.html src/*.css src/*.json scripts/*.mjs"
   },
   "devDependencies": {
     "prettier": "3.6.2",

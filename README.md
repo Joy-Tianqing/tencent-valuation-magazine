@@ -1,6 +1,6 @@
 # 腾讯估值 · 金融杂志
 
-一个可独立部署的单页网站，用金融杂志的排版呈现腾讯控股估值分析。页面包含原分析的价值区间和分部估值、2026 年第二季财报核对、影响结论的条件，以及可展开的专业术语解释。
+一个可独立部署的单页网站，用金融杂志的排版呈现腾讯控股估值分析。页面包含原分析的价值区间和分部估值、2026 年第二季财报核对及影响结论的条件。专业术语和关键数据口径可在原位悬停查看，键盘聚焦或触屏点按也能打开说明。
 
 **在线页面：** https://joy-tianqing.github.io/tencent-valuation-magazine/
 
@@ -20,11 +20,13 @@ npm run check
 npm run dev
 ```
 
-浏览 http://127.0.0.1:8767/ 。`npm run build` 将静态网站生成到 `docs/`，其中不含运行时 JavaScript；页面的术语展开由原生 HTML `<details>` 实现。
+浏览 http://127.0.0.1:8767/ 。`npm run build` 将网站生成到 `docs/`；说明浮层由少量 TypeScript 编译的浏览器脚本控制。
 
 ## 修改与发布
 
-- 正文、数字和解释：`src/report.html`
+- 正文与数字：`src/report.html`
+- 解释词条：`src/notes.json`
+- 悬停、键盘和触屏交互：`src/explain.ts`
 - 页面外壳与构建逻辑：`src/build.ts`
 - 色彩、排版和响应式布局：`src/styles.css`
 - 站点图标：`src/favicon.svg`
