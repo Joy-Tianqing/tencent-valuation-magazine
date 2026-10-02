@@ -9,6 +9,11 @@ const sourceChat =
   "https://chatgpt.com/share/6abf5c95-2d88-83ea-b81d-019e484110e8";
 const sourceQ2 =
   "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf";
+const sourceFY25 =
+  "https://static.www.tencent.com/uploads/2026/03/18/bd32d8ee320b72f0d72d545fd2d65851.pdf";
+const sourceAnnual =
+  "https://static.www.tencent.com/uploads/2026/04/09/62d786fcf3d3c8cb7e54791ee95439ac.pdf";
+const sourceTeam = "https://www.tencent.com/zh-cn/team/ma-huateng-pony-ma/";
 
 type Explanation = { title: string; body: string };
 const notes: Record<string, Explanation> = JSON.parse(
@@ -26,6 +31,9 @@ const commonMain = fs
   .readFileSync(path.resolve(process.cwd(), "src/report.html"), "utf8")
   .replace("{{SOURCE_CHAT}}", sourceChat)
   .replace("{{SOURCE_Q2}}", sourceQ2)
+  .replace("{{SOURCE_FY25}}", sourceFY25)
+  .replace("{{SOURCE_ANNUAL}}", sourceAnnual)
+  .replace("{{SOURCE_TEAM}}", sourceTeam)
   .replace(/data-note="([^"]+)"/g, (_: string, key: string) => {
     if (!notes[key]) throw new Error(`Missing explanation: ${key}`);
     return `data-note="${key}" title="${escapeAttribute(notes[key].body)}"`;
@@ -64,6 +72,7 @@ const html = `<!doctype html>
     <nav class="site-nav" aria-label="页面目录">
       <a href="#bridge-title">估值结构</a>
       <a href="#facts-title">财报核对</a>
+      <a href="#cash-title">现金流与 AI</a>
       <a href="#thesis-title">关键判断</a>
       <a href="#source-title">来源与版本</a>
     </nav>

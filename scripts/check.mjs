@@ -20,6 +20,7 @@ for (const heading of [
   "价值由三部分组成",
   "上下限是怎样算出来的",
   "财报给出的核对点",
+  "花出去的钱，哪些是维持业务所需？",
   "真正需要判断的变量",
   "来源与版本",
 ]) {
@@ -31,6 +32,8 @@ for (const value of [
   "HK$431",
   "2048",
   "436",
+  "同比 +11%",
+  "同比 +22%",
   "528",
   "−138",
   "+376",
@@ -40,11 +43,34 @@ for (const value of [
   "CapEx",
   "SOTP",
   "ROIC",
+  "1826",
+  "984",
+  "603",
+  "1.534",
+  "632.2 万股",
+  "HK$800",
+  "19%–22%",
+  "约 8%",
+  "18–21 倍",
+  "5%–6%",
+  "12%–15%+",
+  "9%–11%",
+  "600+ 港元",
+  "470–500 港元",
+  "微信关系链 → 用户时间 → 小程序 → 支付 → 广告 → 游戏发行 → 企业服务",
+  "同一份流量，能否创造更多收入？",
+  "长青游戏能否持续产生现金？",
 ]) {
   assert(html.includes(value), `Missing report value: ${value}`);
 }
 assert(html.includes("历史分析快照"), "The valuation date warning is required");
 assert(html.includes("腾讯官方业绩 PDF"), "The official source must be linked");
+assert(html.includes("腾讯 2025 年业绩稿"), "The annual source must be linked");
+assert(
+  html.includes("腾讯 2025 年年报"),
+  "Buyback cancellation source must be linked",
+);
+assert(html.includes("腾讯管理团队介绍"), "Leadership source must be linked");
 assert(!html.includes("{{SOURCE_"), "Source URL placeholders must be resolved");
 assert(
   !html.includes("glossary-section"),
@@ -101,6 +127,12 @@ assert(
   html.includes("原文没有完整列出折现率"),
   "Core valuation limits must stay explicit",
 );
+assert.equal(Math.round((1 - 431 / 530) * 100), 19);
+assert.equal(Math.round((1 - 431 / 550) * 100), 22);
+assert.equal(Math.round((1 - 431 / 470) * 100), 8);
+assert.equal(((800 / 50000) * 100).toFixed(1), "1.6");
+assert.equal(((800 / 40000) * 100).toFixed(1), "2.0");
+assert(html.includes("不是公司指引、实时目标价或未来股价预测"));
 assert(
   !html.includes('class="chart-note"'),
   "Chart explanation should be in hover notes",
